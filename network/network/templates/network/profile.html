@@ -1,0 +1,33 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+    <h1>{{ profile_username }}'s Profile</h1>
+    <div id="follower-info">
+        <h2>Followers: {{profile_user.followers.all|length}}</h2>
+        <h2>Following: {{profile_user.following.all|length}}</h2>
+    </div>
+
+    {% if user.username != profile_username %}
+    <div id="follow-button-container">
+        <form id="follow-form" action="{% url 'profile' profile_username %}" method="POST">
+            {% csrf_token %}
+
+            {% if profile_user in user.following.all %}
+            <input type="submit" id="follow-button" class="btn btn-primary" value="Unfollow this user"/>
+            {% else %}
+            <input type="submit" id="follow-button" class="btn btn-primary" value="Follow this user"/>
+            {% endif %}
+        </form>
+    </div>
+    {% endif %}
+
+    {% for post in posts %}
+        {% if post.author == profile_user %}
+        <div class="post">
+            <a class="nav-link" href="{% url 'profile' post.author.username %}"><strong>{{ post.author.username }}</strong></a>
+            <span>{{ post.content }}</span>
+            <h4>{{ post.date }}</h4>
+        </div>
+        {% endif %}
+    {% endfor %}
+{% endblock %}

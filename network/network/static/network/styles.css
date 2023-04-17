@@ -1,0 +1,73 @@
+:root {
+    --background: #e5e8eb;
+    --font-color: #2d2f31;
+    --borders: #bcc1c7;
+
+    --post-width: 600px;
+
+    --success: #0b836b;
+    --error: #a72727;
+}
+
+body {
+    text-align: center;
+    vertical-align: middle;
+    font-size: 24px;
+    font-family: 'Gaegu', sans-serif;
+    background-color: var(--background);
+    color: var(--font-color);
+}
+
+.post {
+    text-align: left;
+
+    height: calc(var(--post-width) * 0.45);
+    width: var(--post-width);
+
+    margin: 5px;
+    border-radius: 2px;
+    border: 1px solid var(--borders);
+}
+
+#new-post-view {
+    text-align: left;
+
+    height: calc(var(--post-width) * 0.45);
+    width: var(--post-width);
+
+    margin: 5px;
+    border-radius: 2px;
+    border: 1px solid var(--borders);
+}
+
+#new-post-form {
+    margin: 5px;
+}
+
+#new-post-body {
+    width: calc(var(--post-width) - 50px);
+}
+
+#announcement {
+    position: absolute;
+    padding: 10px;
+    text-align: center;
+    color: white;
+    font-size: 12px;
+    border-radius: 15px;
+    animation: fadeout 4s 2s;
+    animation-fill-mode: forwards;
+}
+
+.success {
+    background: var(--success);
+}
+
+.error {
+    background: var(--error);
+}
+
+@keyframes fadeout {
+    from {opacity: 100%;}
+    to {opacity: 0%;}
+}

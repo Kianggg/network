@@ -1,5 +1,28 @@
 {% extends "network/layout.html" %}
 
 {% block body %}
-    TODO
+    {% if user.is_authenticated %}
+    <div id="new-post-view">
+        <h3>New Post</h3>
+        <form id="new-post-form" action="{% url 'index' %}" method="POST">
+            {% csrf_token %}
+            <textarea id="new-post-body" maxlength="128" placeholder="Your post here" name="content"></textarea>
+            <input type="submit" id="new-post-button" class="btn btn-primary"/>
+        </form>
+    </div>
+
+        {% for post in posts %}
+            <div class="post" id="{{post.id}}">
+                <a class="nav-link" href="{% url 'profile' post.author.username %}"><strong>{{ post.author.username }}</strong></a>
+                <span id="post-content">{{ post.content }}</span>
+                <h4>{{ post.date }}</h4>
+                {% if user == post.author %}
+                <input type="submit" id="edit-post-button" class="btn btn-primary" value="Edit"/>
+                {% endif %}
+            </div>
+        {% endfor %}
+    {% else %}
+    <h1>You are not logged in!</h1>
+    <h3>Please <a class="nav-link" href="{% url 'login' %}">log in</a> or <a class="nav-link" href="{% url 'register' %}">register an account</a> to create and view posts.</h3>
+    {% endif %}
 {% endblock %}
